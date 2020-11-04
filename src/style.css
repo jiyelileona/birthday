@@ -1,3 +1,8 @@
+html {
+  font-size: 18px;
+}
+
 body {
-  background-color: mediumaquamarine;
+  background-color: black;
+  font-size: 4rem;
 }

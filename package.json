@@ -1,5 +1,5 @@
 {
-  "name": "moment",
+  "name": "myMoment",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,6 +15,12 @@
   "license": "ISC",
   "devDependencies": {
     "cssnano": "^4.1.10",
-    "prettier-airbnb-config": "^1.0.0"
+    "moment": "^2.29.1",
+    "prettier-airbnb-config": "^1.0.0",
+    "sweetalert": "^2.1.2"
+  },
+  "dependencies": {
+    "mo": "^1.7.3",
+    "s": "^1.0.0"
   }
 }
