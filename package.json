@@ -8,7 +8,7 @@
     "start": "npm run clean; parcel src/index.html",
     "clean": "shx rm -rf dist .cache",
     "submit": "shx cp -r src $npm_package_name; cross-zip $npm_package_name; shx rm -rf $npm_package_name",
-    "build": "npm run clean; parcel build src/index.html",
+    "build": "npm run clean; parcel build src/index.html --public-url /$npm_package_name",
     "deploy": "npm run build; gh-pages -d dist"
   },
   "keywords": [],
