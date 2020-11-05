@@ -1,8 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html {
   font-size: 18px;
+  font-family: sans-serif;
 }
 
 body {
-  background-color: black;
+  background-color: white;
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
   font-size: 4rem;
+  display: flex;
+  flex-flow: column;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  border: 0.1rem solid darkslategray;
+}
+
+form label {
+  font-family: 'Pacifico', cursive;
+}
+
+form input {
+  font-size: 1rem;
+  padding: 0.25rem;
+}
+
+form input[type='submit'] {
+  background-color: mediumslateblue;
+  color: white;
+  align-self: center;
+  padding: 0.25rem 1rem;
+}
+
+form input[type='submit']:hover {
+  border-radius: 0.5rem;
+}
+
+form > * + * {
+  margin-top: 0.5rem;
+  border: inherit;
+  border-radius: 0.5rem;
 }

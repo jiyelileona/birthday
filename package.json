@@ -1,26 +1,31 @@
 {
-  "name": "myMoment",
+  "name": "birthday",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "prettier": "prettier-airbnb-config",
   "scripts": {
     "start": "npm run clean; parcel src/index.html",
-    "clean": "Remove-Item dist -Recurse; Remove-Item .cache -Recurse",
-    "build": "npm run clean; parcel build src/index.html",
-    "deploy": "npm run build; surge -d https://yuanyuanmoment.surge.sh dist"
+    "clean": "shx rm -rf dist .cache",
+    "submit": "shx cp -r src $npm_package_name; cross-zip $npm_package_name; shx rm -rf $npm_package_name",
+    "build": "npm run clean; parcel build src/index.html --public-url /$npm_package_name",
+    "deploy": "npm run build; gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "cssnano": "^4.1.10",
+    "gh-pages": "^3.1.0",
     "moment": "^2.29.1",
     "prettier-airbnb-config": "^1.0.0",
+    "shx": "^0.3.3",
     "sweetalert": "^2.1.2"
   },
   "dependencies": {
     "mo": "^1.7.3",
+    "r": "0.0.5",
+    "regenerator-runtime": "^0.13.7",
     "s": "^1.0.0"
   }
 }
