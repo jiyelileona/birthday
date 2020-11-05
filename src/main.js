@@ -1,29 +1,44 @@
+import 'regenerator-runtime/runtime';
 import moment from 'moment';
 import swal from 'sweetalert';
 
-birthdayInput.addEventListener('change', function () {
-  let birthday = moment(birthdayInput.value);
-  let message = `You were born ${birthday.fromNow('years')}, it was a ${birthday.format('dddd')}`;
-  swal('Congratulations', message, 'success');
-  randomBackground();
+function setBackground(hue) {
+  document.body.style.backgroundColor = `hsl(${hue % 360}deg, 50%, 70%)`;
+}
+
+async function randomBackground() {
+  const url =
+    'https://www.random.org/integers/?num=1&min=1&max=360&col=1&base=16&format=plain&rnd=new';
+  try {
+    let response = await fetch(url);
+
+    if (!response.ok) {
+      throw "Couldn't get a number from random.org";
+    }
+
+    let text = await response.text();
+    setBackground(Number.parseInt(text, 16));
+  } catch (err) {
+    console.error(err);
+    let birthday = moment(birthdayInput.value);
+    setBackground(birthday.dayOfYear());
+  }
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  birthdayInput.focus();
 });
 
-const randomURL =
-  'https://www.randomx.org/integers/?num=1&min=1&max=360&col=1&base=16&format=plain&rnd=new';
+birthdayForm.addEventListener('submit', async function (event) {
+  event.preventDefault();
+  let birthday = moment(birthdayInput.value);
 
-function setBackground(hexHue) {
-  let hue = Number.parseInt(hexHue, 16);
-  document.body.style.backgroundColor = `hsl(${hue}deg, 50%, 70%)`;
-}
-
-function randomBackground() {
-  fetch(randomURL)
-    .then(response => {
-      console.log(response.status);
-      response.text().then(setBackground);
-    })
-    .catch(err => {
-      let birthday = moment(birthdayInput.value);
-      console.log(err.message);
-    });
-}
+  if (birthday.isValid()) {
+    let message = `You were born ${birthday.fromNow()}, it was a ${birthday.format('dddd')}`;
+    await swal('Congratulations', message, 'success');
+    birthdayInput.focus();
+    randomBackground();
+  } else {
+    console.error('Please enter a valid date');
+  }
+});
