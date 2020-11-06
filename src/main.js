@@ -1,6 +1,25 @@
 import 'regenerator-runtime/runtime';
 import moment from 'moment';
 import swal from 'sweetalert';
+import {shuffle} from 'lodash';
+
+const rainbow = [
+  'maroon',
+  'orangered',
+  'gold',
+  'chartreuse',
+  'mediumaquamarine',
+  'midnightblue',
+  'blueviolet',
+];
+
+function colorBirthdayText() {
+  birthdayForm.firstElementChild.style.color = 'transparent';
+
+  shuffle(rainbow).forEach((color, index) => {
+    document.documentElement.style.setProperty(`--color-${index + 1}`, color);
+  });
+}
 
 function setBackground(hue) {
   document.body.style.backgroundColor = `hsl(${hue % 360}deg, 50%, 70%)`;
@@ -38,6 +57,7 @@ birthdayForm.addEventListener('submit', async function (event) {
     await swal('Congratulations', message, 'success');
     birthdayInput.focus();
     randomBackground();
+    colorBirthdayText();
   } else {
     console.error('Please enter a valid date');
   }
